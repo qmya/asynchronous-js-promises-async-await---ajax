@@ -99,7 +99,14 @@ const renderError = function (msg) {
 
 const getCountryData = country => {
   fetch(`https://restcountries.eu/rest/v2/name/${country}`)
-    .then(response => response.json())
+    .then(response => {
+      console.log(response);
+
+      if (!response.ok)
+        throw new Error(`Country not found (${response.status})`);
+
+      return response.json();
+    })
     .then(data => {
       renderCountry(data[0]);
       //Here after getting the country I will call the neighbour country of it 👇🏽:
@@ -119,5 +126,5 @@ const getCountryData = country => {
 };
 
 btn.addEventListener('click', function () {
-  getCountryData('pakistan');
+  getCountryData('hdsjkfdhkj');
 });
