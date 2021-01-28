@@ -100,9 +100,10 @@ const getCountryData = country => {
       //Here after getting the country I will call the neighbour country of it 👇🏽:
       const neighbour = data[0].borders[0];
       if (!neighbour) return;
-      fetch(`https://restcountries.eu/rest/v2/alpha/${neighbour}`)
-        .then(response => response.json())
-        .then(data => console.log(data));
-    });
+      return fetch(`https://restcountries.eu/rest/v2/alpha/${neighbour}`);
+     });
+      .then(response => response.json())
+      .then(data => renderCountry(data, 'neighbour'));
+   
 };
 getCountryData('pakistan');
