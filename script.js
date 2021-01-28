@@ -64,5 +64,26 @@ const renderCountry = function (data, className = '') {
 // getCountryAndNeighbour('canada');
 
 //New Way of getting data from an API
-const request = fetch('https://restcountries.eu/rest/v2/name/pakistan');
-console.log(request); //it will return a Promise here
+
+// const getCountryData = function (country) {
+//   const request = fetch(`https://restcountries.eu/rest/v2/name/${country}`)
+//     .then(function (response) {
+//       console.log(response);
+//       //read the data from the response we read the data by .json method
+//       return response.json(); //call the json on response to see the data //json is also a promise
+//     })
+//     .then(function (data) {
+//       console.log(data);
+//       renderCountry(data[0]);
+//     });
+// };
+// getCountryData('pakistan');
+//Same as ☝🏽 but using arrow function
+//New Way of getting data from an API
+const getCountryData = country => {
+  const request = fetch(`https://restcountries.eu/rest/v2/name/${country}`)
+    //read the data from the response we read the data by .json method
+    .then(response => response.json()) //call the json on response to see the data //json is also a promise
+    .then(data => renderCountry(data[0]));
+};
+getCountryData('pakistan');
